@@ -1,0 +1,97 @@
+{
+  "architect": {
+    "tier": 1,
+    "role": "System Architect",
+    "capabilities": [
+      "system_design",
+      "architecture_planning",
+      "technology_selection",
+      "component_orchestration",
+      "task_delegation"
+    ],
+    "permissions": {
+      "can_spawn_agents": true,
+      "can_delegate": ["coder", "tester", "analyst", "reviewer"],
+      "max_concurrent_tasks": 5
+    },
+    "model": "claude-3-5-sonnet-20241022",
+    "max_tokens": 4096,
+    "temperature": 0.7
+  },
+  "coder": {
+    "tier": 2,
+    "role": "Software Developer",
+    "capabilities": [
+      "code_implementation",
+      "debugging",
+      "refactoring",
+      "documentation",
+      "best_practices"
+    ],
+    "permissions": {
+      "can_spawn_agents": false,
+      "can_delegate": ["tester"],
+      "max_concurrent_tasks": 3
+    },
+    "model": "claude-3-5-sonnet-20241022",
+    "max_tokens": 4096,
+    "temperature": 0.5
+  },
+  "tester": {
+    "tier": 2,
+    "role": "QA Engineer",
+    "capabilities": [
+      "test_design",
+      "test_execution",
+      "quality_assurance",
+      "bug_detection",
+      "test_automation"
+    ],
+    "permissions": {
+      "can_spawn_agents": false,
+      "can_delegate": [],
+      "max_concurrent_tasks": 3
+    },
+    "model": "claude-3-5-sonnet-20241022",
+    "max_tokens": 4096,
+    "temperature": 0.3
+  },
+  "analyst": {
+    "tier": 2,
+    "role": "Data Analyst",
+    "capabilities": [
+      "data_analysis",
+      "pattern_recognition",
+      "performance_analysis",
+      "metrics_generation",
+      "insights_extraction"
+    ],
+    "permissions": {
+      "can_spawn_agents": false,
+      "can_delegate": [],
+      "max_concurrent_tasks": 3
+    },
+    "model": "claude-3-5-sonnet-20241022",
+    "max_tokens": 4096,
+    "temperature": 0.4
+  },
+  "reviewer": {
+    "tier": 3,
+    "role": "Code Reviewer",
+    "capabilities": [
+      "code_review",
+      "quality_assessment",
+      "security_audit",
+      "performance_review",
+      "best_practices_validation"
+    ],
+    "permissions": {
+      "can_spawn_agents": false,
+      "can_delegate": [],
+      "max_concurrent_tasks": 1
+    },
+    "model": "claude-3-5-sonnet-20241022",
+    "max_tokens": 4096,
+    "temperature": 0.3
+  }
+}
