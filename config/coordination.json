@@ -1,0 +1,103 @@
+{
+  "coordination": {
+    "mode": "hierarchical",
+    "communication": {
+      "protocol": "message-passing",
+      "async": true,
+      "timeout": 30000
+    },
+    "policies": {
+      "tier1": {
+        "can_initiate_workflow": true,
+        "can_spawn_agents": true,
+        "can_delegate_to": ["tier1", "tier2", "tier3"],
+        "max_concurrent_delegations": 5,
+        "priority": "high"
+      },
+      "tier2": {
+        "can_initiate_workflow": false,
+        "can_spawn_agents": false,
+        "can_delegate_to": ["tier2", "tier3"],
+        "max_concurrent_delegations": 3,
+        "priority": "medium"
+      },
+      "tier3": {
+        "can_initiate_workflow": false,
+        "can_spawn_agents": false,
+        "can_delegate_to": [],
+        "max_concurrent_delegations": 1,
+        "priority": "low"
+      }
+    },
+    "memory_isolation": {
+      "enabled": true,
+      "scope": "agent",
+      "shared_memory": false,
+      "persistent": true
+    },
+    "security": {
+      "credential_isolation": true,
+      "sandbox_execution": true,
+      "api_key_rotation": false,
+      "rate_limiting": {
+        "enabled": true,
+        "requests_per_minute": 50,
+        "burst": 10
+      }
+    }
+  },
+  "workflows": {
+    "sparc": {
+      "phases": ["specification", "pseudocode", "architecture", "refinement", "completion"],
+      "sequential": true,
+      "allow_backtrack": true,
+      "checkpoint_enabled": true
+    },
+    "parallel": {
+      "max_concurrent": 5,
+      "load_balancing": "round-robin",
+      "failure_handling": "continue"
+    },
+    "sequential": {
+      "pipeline": true,
+      "pass_results": true,
+      "stop_on_error": true
+    },
+    "conditional": {
+      "branching": true,
+      "evaluation": "runtime",
+      "default_branch": "simple"
+    },
+    "stream": {
+      "buffer_size": 1024,
+      "chunk_processing": true,
+      "backpressure": true
+    }
+  },
+  "mcp_tools": {
+    "enabled": true,
+    "auto_discovery": true,
+    "tools": [
+      {
+        "name": "file_operations",
+        "capabilities": ["read", "write", "list"],
+        "agents": ["coder", "architect"]
+      },
+      {
+        "name": "code_analysis",
+        "capabilities": ["lint", "format", "analyze"],
+        "agents": ["reviewer", "coder"]
+      },
+      {
+        "name": "data_processing",
+        "capabilities": ["transform", "aggregate", "visualize"],
+        "agents": ["analyst"]
+      },
+      {
+        "name": "test_runner",
+        "capabilities": ["unit", "integration", "e2e"],
+        "agents": ["tester"]
+      }
+    ]
+  }
+}
